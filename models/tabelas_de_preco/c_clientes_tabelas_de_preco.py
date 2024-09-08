@@ -1,105 +1,74 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import HTTPException
 from pydantic import BaseModel
 from typing import Optional, List
-from sqlalchemy import Column, Integer, DateTime
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import declarative_base, sessionmaker, Session
 from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy import text
 from config import engine
 
-# Inicializar a sessão
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Definir a base
+# Definição da base
 Base = declarative_base()
 
 # Modelo Pydantic para c_clientes_tabelas_de_preco
 class ClienteTabelaPreco(BaseModel):
     id: Optional[int]
     cliente_id: int
-    tabela_preco_id: int
-    data_validade: Optional[str]
+    cliente_loja: Optional[str]
+    cliente_tabela_preco_id: Optional[int]
 
 # Modelo ORM para c_clientes_tabelas_de_preco
 class ClienteTabelaPrecoDB(Base):
-    __tablename__ = "c_clientes_tabelas_de_preco"
+    __tablename__ = "c_clientes_tabelas_preco"
     id = Column(Integer, primary_key=True, index=True)
-    cliente_id = Column(Integer)  # Removida a ForeignKey
-    tabela_preco_id = Column(Integer)
-    data_validade = Column(DateTime)
+    cliente_id = Column(Integer)
+    cliente_loja = Column(String(255))
+    cliente_tabela_preco_id = Column(Integer)
 
     def as_dict(self):
         return {
             "id": self.id,
             "cliente_id": self.cliente_id,
-            "tabela_preco_id": self.tabela_preco_id,
-            "data_validade": self.data_validade
+            "cliente_loja": self.cliente_loja,
+            "cliente_tabela_preco_id": self.cliente_tabela_preco_id
         }
 
-# Operações CRUD para c_clientes_tabelas_de_preco
-
-def listar_tabela_preco_cliente(cliente_id: Optional[int] = None, tabela_preco_id: Optional[int] = None):
-    """
-    Função para listar entradas da tabela c_clientes_tabelas_de_preco com filtros opcionais.
-    A busca é feita da seguinte maneira:
-    - Se `cliente_id` for passado, filtra por `cliente_id`.
-    - Se `cliente_id` não for passado e `tabela_preco_id` for passado, filtra por `tabela_preco_id`.
-    - Se nenhum dos dois for passado, retorna todos os registros.
-    """
+# Função para listar as entradas da tabela c_clientes_tabelas_de_preco
+def listar_clientes_tabelas_preco(cliente_id):
     db = SessionLocal()
     try:
-        query = db.query(ClienteTabelaPrecoDB)
-
-        # Verifica se o `cliente_id` foi passado
-        if cliente_id is not None:
-            query = query.filter(ClienteTabelaPrecoDB.cliente_id == cliente_id)
-
-        # Caso `cliente_id` não seja passado, verifica se `tabela_preco_id` foi passado
-        elif tabela_preco_id is not None:
-            query = query.filter(ClienteTabelaPrecoDB.tabela_preco_id == tabela_preco_id)
-
-        # Se nenhum dos parâmetros for passado, retorna todos os registros
-        resultados = query.all()
-
-        return [resultado.as_dict() for resultado in resultados]
-
+        clientes = db.query(ClienteTabelaPrecoDB).filter(ClienteTabelaPrecoDB.cliente_id == cliente_id).all()
+        return [cliente.as_dict() for cliente in clientes]
     except SQLAlchemyError as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
-def inserir_tabela_preco_cliente(tabela_preco: ClienteTabelaPreco):
-    """
-    Função para inserir uma nova entrada na tabela c_clientes_tabelas_de_preco.
-    """
+# Função para inserir vários registros na tabela c_clientes_tabelas_de_preco
+def inserir_clientes_tabelas_preco(clientes: List[ClienteTabelaPreco]):
     db = SessionLocal()
     try:
-        nova_tabela = ClienteTabelaPrecoDB(
-            cliente_id=tabela_preco.cliente_id,
-            tabela_preco_id=tabela_preco.tabela_preco_id,
-            data_validade=tabela_preco.data_validade
-        )
-        db.add(nova_tabela)
+        # Percorre todos os registros e adiciona à sessão do banco de dados
+        for cliente in clientes:
+            novo_cliente = ClienteTabelaPrecoDB(
+                cliente_id=cliente.cliente_id,
+                cliente_loja=cliente.cliente_loja,
+                cliente_tabela_preco_id=cliente.cliente_tabela_preco_id
+            )
+            db.add(novo_cliente)
         db.commit()
-        db.refresh(nova_tabela)
-        return {"message": "Tabela de preço inserida com sucesso"}
+        return {"message": "Clientes e tabelas de preços inseridos com sucesso"}
     except SQLAlchemyError as e:
         db.rollback()
-        raise HTTPException(status_code=500, detail=str(e))
+        return {"error": str(e)}
 
-
-def deletar_tabela_preco_cliente(id: int):
-    """
-    Função para deletar uma entrada da tabela c_clientes_tabelas_de_preco.
-    """
+# Função para deletar todos os registros da tabela c_clientes_tabelas_de_preco
+def deletar_todos_clientes_tabelas_preco():
     db = SessionLocal()
     try:
-        tabela_existente = db.query(ClienteTabelaPrecoDB).filter(ClienteTabelaPrecoDB.id == id).first()
-        if tabela_existente:
-            db.delete(tabela_existente)
-            db.commit()
-            return {"message": "Tabela de preço deletada com sucesso"}
-        else:
-            raise HTTPException(status_code=404, detail="Tabela de preço não encontrada")
+        db.execute(text("DELETE FROM c_clientes_tabelas_de_preco"))
+        db.commit()
+        return {"message": "Todos os registros de clientes e tabelas de preços foram deletados com sucesso"}
     except SQLAlchemyError as e:
         db.rollback()
-        raise HTTPException(status_code=500, detail=str(e))
+        return {"error": str(e)}

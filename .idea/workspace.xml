@@ -4,19 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e72157d4-7ca8-43bc-bef2-8145ab5dbfef" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/portal-comprador.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/produtos/c_categorias_imagens.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/produtos/c_produto_imagens.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/tabelas_de_preco/c_clientes_tabelas_de_preco.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/categorias.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/sistema/produtos.html" afterDir="false" />
+    <list default="true" id="e72157d4-7ca8-43bc-bef2-8145ab5dbfef" name="Changes" comment="endpoints ajustados, ategorias,  imagens de categorias, cadastro de usuário com id de cliente, cadastro de produto, tabelas de preço/cliente">
+      <change afterPath="$PROJECT_DIR$/static/assets/img/categorias/bebidasalcoolicas.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/img/categorias/default-image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/img/produtos/default-image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/img/produtos/f0c325a4-ddde-4c68-b8f9-881eec43021f.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/catalogo-produtos.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/produtos.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/sistema/bkp.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/sistema/catalogo-produtos.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/sistema/importar-imagem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/tabelas_de_preco/c_clientes_tabelas_de_preco.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/tabelas_de_preco/c_clientes_tabelas_de_preco.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/categorias.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/categorias.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/sistema/produtos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sistema/produtos.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,21 +43,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.install.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/ademilson/PycharmProjects/portal-comprador/templates/sistema"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.c_produtos.executor&quot;: &quot;Run&quot;,
+    &quot;Python.install.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ademilson/PycharmProjects/portal-comprador/static/assets/img/categorias&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ademilson\PycharmProjects\portal-comprador\static\assets\img\categorias" />
+      <recent name="C:\Users\ademilson\PycharmProjects\portal-comprador\static\assets\img\produtos" />
       <recent name="C:\Users\ademilson\PycharmProjects\portal-comprador\templates\sistema" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.c_produtos">
+    <configuration name="c_produtos" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="portal-comprador" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/models/produtos" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/models/produtos/c_produtos.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="install" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="portal-comprador" />
       <option name="ENV_FILES" value="" />
@@ -81,6 +107,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.c_produtos" />
         <item itemvalue="Python.install" />
       </list>
     </recent_temporary>
@@ -101,6 +128,40 @@
       <option name="presentableId" value="Default" />
       <updated>1725129548060</updated>
     </task>
+    <task id="LOCAL-00001" summary="endpoints ajustados, ategorias,  imagens de categorias, cadastro de usuário com id de cliente, cadastro de produto, tabelas de preço/cliente">
+      <option name="closed" value="true" />
+      <created>1725423534446</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1725423534446</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="endpoints ajustados, ategorias,  imagens de categorias, cadastro de usuário com id de cliente, cadastro de produto, tabelas de preço/cliente" />
+    <option name="LAST_COMMIT_MESSAGE" value="endpoints ajustados, ategorias,  imagens de categorias, cadastro de usuário com id de cliente, cadastro de produto, tabelas de preço/cliente" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/models/produtos/c_produtos.py</url>
+          <line>297</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>134</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>534</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
