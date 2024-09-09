@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e72157d4-7ca8-43bc-bef2-8145ab5dbfef" name="Changes" comment="Listagem de produtos na tela com preços por tabela de preço de clientes completa">
+      <change afterPath="$PROJECT_DIR$/templates/sistema/meu-carrinho.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/produtos.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/produtos.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sistema/bkp.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sistema/importar-imagem.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/sistema/produtos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sistema/produtos.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +30,12 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ademilsonpires"
+  }
+}]]></component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/ademilsonpires/portal-comprador.git",
@@ -47,21 +51,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.c_produtos.executor&quot;: &quot;Run&quot;,
-    &quot;Python.install.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ademilson/PycharmProjects/portal-comprador/static/assets/img/categorias&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.c_produtos.executor": "Run",
+    "Python.install.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/ademilson/PycharmProjects/portal-comprador/templates/sistema"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ademilson\PycharmProjects\portal-comprador\templates\sistema" />
       <recent name="C:\Users\ademilson\PycharmProjects\portal-comprador\static\assets\img\categorias" />
       <recent name="C:\Users\ademilson\PycharmProjects\portal-comprador\static\assets\img\produtos" />
-      <recent name="C:\Users\ademilson\PycharmProjects\portal-comprador\templates\sistema" />
     </key>
   </component>
   <component name="RunManager" selected="Python.c_produtos">
@@ -156,7 +160,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725867568650</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Listagem de produtos na tela com preços por tabela de preço de clientes completa">
+      <option name="closed" value="true" />
+      <created>1725867636998</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1725867636998</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -174,12 +186,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>134</line>
+          <line>136</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>534</line>
+          <line>536</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
