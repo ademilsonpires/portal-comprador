@@ -4,19 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e72157d4-7ca8-43bc-bef2-8145ab5dbfef" name="Changes" comment="endpoints ajustados, ategorias,  imagens de categorias, cadastro de usuário com id de cliente, cadastro de produto, tabelas de preço/cliente">
-      <change afterPath="$PROJECT_DIR$/static/assets/img/categorias/bebidasalcoolicas.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/img/categorias/default-image.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/img/produtos/default-image.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/img/produtos/f0c325a4-ddde-4c68-b8f9-881eec43021f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/catalogo-produtos.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/produtos.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/sistema/bkp.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/sistema/catalogo-produtos.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/sistema/importar-imagem.html" afterDir="false" />
+    <list default="true" id="e72157d4-7ca8-43bc-bef2-8145ab5dbfef" name="Changes" comment="Listagem de produtos na tela com preços por tabela de preço de clientes completa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/tabelas_de_preco/c_clientes_tabelas_de_preco.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/tabelas_de_preco/c_clientes_tabelas_de_preco.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/categorias.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/categorias.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/produtos.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/produtos.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/sistema/produtos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sistema/produtos.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -136,12 +126,21 @@
       <option name="project" value="LOCAL" />
       <updated>1725423534446</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Listagem de produtos na tela com preços por tabela de preço de clientes completa">
+      <option name="closed" value="true" />
+      <created>1725823487964</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1725823487964</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="endpoints ajustados, ategorias,  imagens de categorias, cadastro de usuário com id de cliente, cadastro de produto, tabelas de preço/cliente" />
-    <option name="LAST_COMMIT_MESSAGE" value="endpoints ajustados, ategorias,  imagens de categorias, cadastro de usuário com id de cliente, cadastro de produto, tabelas de preço/cliente" />
+    <MESSAGE value="Listagem de produtos na tela com preços por tabela de preço de clientes completa" />
+    <option name="LAST_COMMIT_MESSAGE" value="Listagem de produtos na tela com preços por tabela de preço de clientes completa" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

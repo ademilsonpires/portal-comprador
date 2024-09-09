@@ -85,7 +85,6 @@ async function buscarProdutosPorEmbalagem(embalagem) {
     }
 }
 
-// Função para carregar embalagens distintas e preencher as abas de navegação
 async function carregarEmbalagens() {
     try {
         const token = getFromLocalStorage('apiRootToken'); // Pega o token salvo no localStorage
@@ -110,6 +109,12 @@ async function carregarEmbalagens() {
 
         // Carregar os preços de acordo com a tabela de preço do cliente
         const precos = await obterTabelaDePrecoCliente();
+        const tabelaDePrecoId = precos.length > 0 ? precos[0].tabela_id : null;
+
+        if (!tabelaDePrecoId) {
+            console.error('Tabela de preço não encontrada');
+            return;
+        }
 
         // Loop para cada embalagem
         for (let index = 0; index < embalagens.length; index++) {
@@ -157,14 +162,14 @@ async function carregarEmbalagens() {
 
                 tabContent.appendChild(tabPane);
 
-                // Carrega os produtos ao clicar na aba
-                navLink.addEventListener('click', () => carregarProdutosPorEmbalagem(embalagem.produto_embalagem, index + 1, precos));
+                // Carrega os produtos ao clicar na aba, passando tabelaDePrecoId
+                navLink.addEventListener('click', () => carregarProdutosPorEmbalagem(embalagem.produto_embalagem, index + 1, precos, tabelaDePrecoId));
             }
         }
 
         // Carregar os produtos para a primeira embalagem por padrão
         if (embalagens.length > 0) {
-            carregarProdutosPorEmbalagem(embalagens[0].produto_embalagem, 1, precos);
+            carregarProdutosPorEmbalagem(embalagens[0].produto_embalagem, 1, precos, tabelaDePrecoId);
         }
 
     } catch (error) {
@@ -172,8 +177,7 @@ async function carregarEmbalagens() {
     }
 }
 
-// Função para carregar produtos por embalagem e exibir no front
-async function carregarProdutosPorEmbalagem(embalagem, tabIndex, precos) {
+async function carregarProdutosPorEmbalagem(embalagem, tabIndex, precos, tabelaDePrecoId) {
     try {
         const token = getFromLocalStorage('apiRootToken');
         const categoriaId = getCategoriaIdFromURL(); // Obtém o ID da categoria a partir da URL
@@ -194,7 +198,6 @@ async function carregarProdutosPorEmbalagem(embalagem, tabIndex, precos) {
         const produtos = await response.json();
         const produtosContainer = document.querySelector(`#produtos-embalagem-${tabIndex}`);
 
-        // Verifica se o container existe antes de tentar manipular o DOM
         if (produtosContainer) {
             produtosContainer.innerHTML = ''; // Limpa os produtos anteriores
 
@@ -210,17 +213,22 @@ async function carregarProdutosPorEmbalagem(embalagem, tabIndex, precos) {
                     produtoDiv.classList.add('col-lg-4', 'menu-item');
 
                     produtoDiv.innerHTML = `
-                        <a href="${imagemProduto}" class="glightbox">
+                        <div class="produto-click" style="cursor: pointer;">
                           <img src="${imagemProduto}" class="menu-img img-fluid" alt="${produto.produto_desc}">
-                        </a>
-                        <h4>${produto.produto_desc}</h4>
-                        <p class="ingredients">
-                          ${produto.produto_unidade_venda}
-                        </p>
-                        <p class="price">
-                          R$${precoProduto ? precoProduto.tabela_vlr_unit.toFixed(2) : '0.00'}
-                        </p>
+                          <h4>${produto.produto_desc}</h4>
+                          <p class="ingredients">
+                            ${produto.produto_unidade_venda}
+                          </p>
+                          <p class="price">
+                            R$${precoProduto ? precoProduto.tabela_vlr_unit.toFixed(2) : '0.00'}
+                          </p>
+                        </div>
                     `;
+
+                    // Adiciona o event listener para clicar no produto e abrir a modal
+                    produtoDiv.querySelector('.produto-click').addEventListener('click', () => {
+                        handleProdutoClick(produto.produto_id, precoProduto ? precoProduto.tabela_vlr_unit : 0, tabelaDePrecoId);
+                    });
 
                     produtosContainer.appendChild(produtoDiv);
                 }
@@ -294,3 +302,165 @@ document.getElementById('search-bar').addEventListener('keydown', function(event
         filtrarProdutos(); // Chama a função de filtro
     }
 });
+
+
+//---------------------------
+async function verificarPedidoAberto(clienteId) {
+    const token = getFromLocalStorage('apiRootToken');
+    try {
+        const response = await fetch(apiRootLink + `/verificar-pedidos-aberto?cliente_id=${clienteId}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'token': token
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao verificar pedido aberto');
+        }
+
+        const pedidos = await response.json();
+        if (pedidos.length > 0 && pedidos[0].pedido_status === 'aberto') {
+            return pedidos[0].pedido_id_app;
+        }
+        return null; // Retorna null se não houver pedido aberto
+    } catch (error) {
+        console.error('Erro:', error);
+        return null;
+    }
+}
+
+async function abrirNovoPedido(clienteId) {
+    const token = getFromLocalStorage('apiRootToken');
+    try {
+        const response = await fetch(apiRootLink + `/add-pedidos/`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'token': token
+            },
+            body: JSON.stringify({
+                pedido_id_app: 0,
+                pedido_cliente_id: clienteId,
+                data_programada: "0",
+                tipo_de_venda: 0,
+                forma_de_pagamento: 0,
+                vendedor_id: 0,
+                pedido_id_gestao: 0,
+                pedido_status: "aberto"
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao abrir novo pedido');
+        }
+
+        const data = await response.json();
+        return data.id_pedido_app_criado; // Retorna o ID do pedido criado
+    } catch (error) {
+        console.error('Erro:', error);
+        return null;
+    }
+}
+
+async function adicionarItemAoPedido(pedidoId, produtoId, quantidade, vlrUnitario, tabelaDePrecoId) {
+    const token = getFromLocalStorage('apiRootToken');
+    try {
+        const response = await fetch(apiRootLink + `/add-itens-de-pedidos/`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'token': token
+            },
+            body: JSON.stringify({
+                item_id: 0,
+                pedido_id_app: pedidoId,
+                produto_id: produtoId,
+                unidade_venda: "0",
+                quantidade: quantidade,
+                vlr_unit_item: vlrUnitario,
+                vlr_total_item: quantidade * vlrUnitario,
+                tabela_de_preco_id: tabelaDePrecoId,
+                pedido_id_gestao: 0
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao adicionar item ao pedido');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erro:', error);
+        return null;
+    }
+}
+
+async function handleProdutoClick(produtoId, vlrUnitario, tabelaDePrecoId) {
+    const clienteId = getFromLocalStorage('apiRootIDCliente');
+    let pedidoId = await verificarPedidoAberto(clienteId);
+
+    // Se não houver um pedido aberto, cria um novo pedido
+    if (!pedidoId) {
+        pedidoId = await abrirNovoPedido(clienteId);
+    }
+
+    if (!pedidoId) {
+        console.error('Erro ao criar ou recuperar pedido');
+        return;
+    }
+
+    // Abre a modal para escolha de quantidade
+    abrirModalEscolhaQuantidade(produtoId, vlrUnitario, pedidoId, tabelaDePrecoId);
+}
+
+// Função para abrir modal e permitir ao usuário escolher a quantidade
+function abrirModalEscolhaQuantidade(produtoId, vlrUnitario, pedidoId, tabelaDePrecoId) {
+    // Exibe a modal de quantidade com um input e botões de incremento
+    const modalHtml = `
+        <div class="modal" id="modalQuantidade">
+            <div class="modal-content">
+                <button class="close" onclick="fecharModal()">&times;</button>
+                <h2>Escolha a Quantidade</h2>
+                <div class="button-group">
+                    <button id="btnDiminuir">-</button>
+                    <input type="number" id="inputQuantidade" value="1" min="1" />
+                    <button id="btnAumentar">+</button>
+                </div>
+                <button id="btnAdicionar" class="btn">Adicionar</button>
+            </div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    const inputQuantidade = document.getElementById('inputQuantidade');
+    document.getElementById('btnDiminuir').addEventListener('click', () => {
+        if (inputQuantidade.value > 1) {
+            inputQuantidade.value--;
+        }
+    });
+
+    document.getElementById('btnAumentar').addEventListener('click', () => {
+        inputQuantidade.value++;
+    });
+
+    document.getElementById('btnAdicionar').addEventListener('click', async () => {
+        const quantidade = parseInt(inputQuantidade.value);
+        await adicionarItemAoPedido(pedidoId, produtoId, quantidade, vlrUnitario, tabelaDePrecoId);
+        fecharModal(); // Fecha a modal após adicionar o item
+    });
+}
+
+// Função para fechar a modal
+function fecharModal() {
+    const modal = document.getElementById('modalQuantidade');
+    if (modal) {
+        modal.remove();
+    }
+}
+
