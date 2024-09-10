@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e72157d4-7ca8-43bc-bef2-8145ab5dbfef" name="Changes" comment="Listagem de produtos na tela com preços por tabela de preço de clientes completa">
-      <change afterPath="$PROJECT_DIR$/templates/sistema/meu-carrinho.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/meu-carrinho.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/mostrar-qtde-itens-carrinho.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/sistema/meu-carrinhobkp.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/produtos.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/produtos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/sistema/meu-carrinho.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sistema/meu-carrinho.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/sistema/produtos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sistema/produtos.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -168,7 +172,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725867636998</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Listagem de produtos na tela com preços por tabela de preço de clientes completa">
+      <option name="closed" value="true" />
+      <created>1725898655826</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1725898655826</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

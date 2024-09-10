@@ -1,3 +1,7 @@
+// Função para salvar dados no localStorage
+function saveToLocalStorage(key, value) {
+    localStorage.setItem(key, value);
+}
 // Função para recuperar dados do localStorage
 function getFromLocalStorage(key) {
     return localStorage.getItem(key);
@@ -391,7 +395,18 @@ async function adicionarItemAoPedido(pedidoId, produtoId, quantidade, vlrUnitari
         if (!response.ok) {
             throw new Error('Erro ao adicionar item ao pedido');
         }
-
+        // Exibe a mensagem de confirmação com SweetAlert2
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucesso!',
+                text: 'Produto adicionado ao carrinho!',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+        obterTotalItensPedido(pedidoId);
+        atualizarCarrinho();
         const data = await response.json();
         return data;
     } catch (error) {
@@ -403,6 +418,9 @@ async function adicionarItemAoPedido(pedidoId, produtoId, quantidade, vlrUnitari
 async function handleProdutoClick(produtoId, vlrUnitario, tabelaDePrecoId) {
     const clienteId = getFromLocalStorage('apiRootIDCliente');
     let pedidoId = await verificarPedidoAberto(clienteId);
+    //salva pedido no local storage
+    saveToLocalStorage('apiRootIDPedido', pedidoId);
+
 
     // Se não houver um pedido aberto, cria um novo pedido
     if (!pedidoId) {

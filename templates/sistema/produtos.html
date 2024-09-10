@@ -40,6 +40,38 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 <style>
+.btn-getstarted {
+    position: relative; /* Necessário para o posicionamento absoluto do badge */
+    padding: 0;
+    margin: 0 10px; /* Espaçamento entre os ícones */
+    font-size: 1.5rem; /* Tamanho do ícone */
+    color: #333; /* Cor do ícone */
+    text-decoration: none; /* Remove sublinhado do link */
+    display: inline-block;
+}
+
+#carrinho .badge {
+    position: absolute;
+    top: -10px; /* Posição acima do ícone */
+    right: -10px; /* Posição à direita do ícone */
+    background-color: #dc3545; /* Cor vermelha padrão do Bootstrap */
+    color: white;
+    border-radius: 50%; /* Forma de círculo */
+    padding: 5px 10px; /* Tamanho do badge */
+    font-size: 12px; /* Tamanho do número */
+    line-height: 1;
+    border: 2px solid white; /* Borda branca ao redor do badge para dar destaque */
+}
+
+.btn-getstarted i {
+    font-size: 1.5rem; /* Tamanho uniforme dos ícones */
+    transition: color 0.3s ease; /* Suave transição na cor ao passar o mouse */
+}
+
+.btn-getstarted:hover i {
+    color: #007bff; /* Altera a cor do ícone ao passar o mouse */
+}
+
 
 .modal {
     display: block;
@@ -187,12 +219,17 @@
 
 
 
+
       </ul>
       <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-    </nav>
 
-    <a class="btn-getstarted" href="/sistema"><i class="fa-solid fa-house"></i> </a>
-    <a class="btn-getstarted" href="/carrinho"><i class="fa-solid fa-cart-shopping"></i> </a>
+    </nav>
+      <a class="btn-getstarted " href="/sistema"><i class="fa-solid fa-house"></i> </a>
+<a class="btn-getstarted" id="carrinho" href="/carrinho">
+  <i class="fa-solid fa-cart-shopping"></i>
+  <span class="badge">0</span> <!-- O número de itens será atualizado aqui -->
+</a>
+
   </div>
 </header>
 
@@ -318,7 +355,10 @@
 <!-- Main JS File -->
 <script src="../static/assets/js/main.js"></script>
 <script src="../static/js/apiRoot.js"></script>
+<script src="../static/js/mostrar-qtde-itens-carrinho.js"></script>
 <script src="../static/js/produtos.js"></script>
+
+
 
 </body>
 
