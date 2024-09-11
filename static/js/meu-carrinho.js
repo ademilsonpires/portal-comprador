@@ -1,4 +1,4 @@
-
+//
 // Função para obter o token do localStorage
 function getFromLocalStorage(key) {
     return localStorage.getItem(key);
@@ -89,23 +89,34 @@ async function alterarQuantidade(itemId, novaQuantidade) {
 
     const token = getFromLocalStorage('apiRootToken');
     try {
-        const response = await fetch(apiRootLink + `/alterar-quantidade-item`, {
+        // Envia a nova quantidade para o backend
+        const response = await fetch(apiRootLink + `/atualizar-qtde-itens-de-pedidos?item_id=${itemId}&nova_quantidade=${novaQuantidade}`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'token': token
-            },
-            body: JSON.stringify({
-                item_id: itemId,
-                nova_quantidade: novaQuantidade
-            })
+            }
         });
 
         if (!response.ok) {
             throw new Error('Erro ao alterar a quantidade do item');
         }
 
+        const data = await response.json();
+
+        // Exibe a mensagem de sucesso usando SweetAlert2
+        Swal.fire({
+            icon: 'success',
+            title: 'Sucesso!',
+            text: data.message,
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        // Recarrega o carrinho após a atualização da quantidade
         const clienteId = getFromLocalStorage('apiRootIDCliente');
         const pedidoId = await verificarPedidoAberto(clienteId);
         const itens = await carregarItensDoPedido(pedidoId);
@@ -120,20 +131,32 @@ async function alterarQuantidade(itemId, novaQuantidade) {
 async function removerItem(itemId) {
     const token = getFromLocalStorage('apiRootToken');
     try {
-        const response = await fetch(apiRootLink + `/remover-item`, {
+        const response = await fetch(apiRootLink + `/deletar-itens-de-pedidos?item_id=${itemId}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
                 'token': token
-            },
-            body: JSON.stringify({ item_id: itemId })
+            }
         });
 
         if (!response.ok) {
             throw new Error('Erro ao remover o item do pedido');
         }
 
+        const data = await response.json();
+
+        // Exibe a mensagem de sucesso usando SweetAlert2
+        Swal.fire({
+            icon: 'success',
+            title: 'Sucesso!',
+            text: data.message,
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        // Atualiza a lista de itens no carrinho
         const clienteId = getFromLocalStorage('apiRootIDCliente');
         const pedidoId = await verificarPedidoAberto(clienteId);
         const itens = await carregarItensDoPedido(pedidoId);
@@ -143,3 +166,47 @@ async function removerItem(itemId) {
         console.error('Erro:', error);
     }
 }
+
+// Função para esvaziar o carrinho
+async function limparCarrinho() {
+    const clienteId = getFromLocalStorage('apiRootIDCliente');
+    const pedidoId = await verificarPedidoAberto(clienteId); // Verifica se há um pedido aberto
+
+    if (pedidoId) {
+        const token = getFromLocalStorage('apiRootToken');
+        try {
+            const response = await fetch(apiRootLink + `/limpar-itens-de-pedidos?pedido_id=${pedidoId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'token': token
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao limpar o carrinho');
+            }
+
+            // Exibe a mensagem de sucesso usando SweetAlert2
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucesso!',
+                text: 'Carrinho esvaziado com sucesso!',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            // Atualiza a lista de itens no carrinho
+            renderizarItensDoCarrinho([]);
+            document.getElementById('totalPedido').textContent = 'R$0.00'; // Reseta o total
+
+        } catch (error) {
+            console.error('Erro:', error);
+        }
+    }
+}
+
+// Evento de clique no botão "Esvaziar Carrinho"
+document.getElementById('esvaziarCarrinhoBtn').addEventListener('click', limparCarrinho);

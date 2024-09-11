@@ -92,7 +92,14 @@
 
 <main class="main">
 
+  <!-- Page Title -->
+<!--  <div class="page-title" data-aos="fade">-->
+<!--    <div class="container">-->
+<!--      <h1>Carrinho de Compras</h1>-->
 
+<!--    </div>-->
+<!--  </div>-->
+  <!-- End Page Title -->
 
 <section id="carrinho-section" class="carrinho-section section">
   <div class="container" data-aos="fade-up">
@@ -106,27 +113,38 @@
     </div>
 
     <!-- Total do Pedido -->
-    <div class="cart-total mb-4 text-end">
-      <h3>Total do Pedido:
-        <span id="totalPedido" class="text-success fw-bold">
-          R$0.00
-        </span>
-      </h3>
+    <div class="cart-total mb-4 text-end"> <!-- Adiciona a classe 'text-end' para alinhar à direita -->
+      <h3>Total do Pedido: <span id="totalPedido" class="text-success fw-bold">R$0.00</span></h3> <!-- Classe 'text-success' para cor verde e 'fw-bold' para negrito -->
     </div>
 
     <!-- Opções do Carrinho -->
     <div class="cart-options mb-4">
       <h2>Opções do Pedido</h2>
 
+      <!-- Escolher Data Programada -->
+      <div class="mb-3">
+        <label for="dataProgramada" class="form-label">Data Programada</label>
+        <input type="date" class="form-control" id="dataProgramada">
+      </div>
+
+      <!-- Escolher Endereço de Entrega -->
+      <div class="mb-3">
+        <label for="enderecoEntrega" class="form-label">Endereço de Entrega</label>
+        <select class="form-select select2 w-100" id="enderecoEntrega">
+          <option value="1">Loja Matriz</option>
+          <option value="2">Loja 2</option>
+          <option value="3">Loja 3</option>
+        </select>
+      </div>
+
       <!-- Botões de Ações -->
       <div class="d-flex justify-content-between">
-        <button class="btn btn-danger" id="esvaziarCarrinhoBtn">Esvaziar Carrinho</button>
+        <button class="btn btn-danger">Esvaziar Carrinho</button>
         <button class="btn btn-success">Finalizar Pedido</button>
       </div>
     </div>
   </div>
 </section>
-
 </main>
 
 
@@ -210,8 +228,6 @@
   <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
-   <!-- SweetAlert2 -->
-<script src="../static/plugins/sweetalert2/sweetalert2.min.js"></script>
 
 
 
