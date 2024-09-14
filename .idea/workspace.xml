@@ -5,11 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e72157d4-7ca8-43bc-bef2-8145ab5dbfef" name="Changes" comment="Listagem de produtos na tela com preços por tabela de preço de clientes completa">
-      <change afterPath="$PROJECT_DIR$/models/clientes/c_clientes_financeiro.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/sistema/meu-carrinhobkp2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/meios_de_pagamento/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/meios_de_pagamento/pg_mercadopago.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/timeline.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/atualiza-status-pedido-pg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/atualiza-status-pedido-pgBKP.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/meu-carrinhobkp2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/meu-carrinhobkp3.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/pedido-detalhes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/pedido-detalhesbkp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/pedidos.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/sistema/meios_de_pagmentos/erro.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/sistema/meios_de_pagmentos/pendente.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/sistema/meios_de_pagmentos/sucesso.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/sistema/pedido-detalhes.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/sistema/pedido-detalhesbkp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/meu-carrinho.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/meu-carrinho.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/produtos.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/produtos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/sistema/catalogo-produtos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sistema/catalogo-produtos.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/sistema/meu-carrinho.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sistema/meu-carrinho.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/sistema/meu-carrinhobkp.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sistema/pedidos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/sistema/produtos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sistema/produtos.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +38,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -32,18 +51,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "ademilsonpires"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ademilsonpires&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ademilsonpires/portal-comprador.git",
-    "accountId": "6e013aa2-00ef-4c25-973d-f94554841f9d"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ademilsonpires/portal-comprador.git&quot;,
+    &quot;accountId&quot;: &quot;6e013aa2-00ef-4c25-973d-f94554841f9d&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -55,22 +74,28 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "Python.c_produtos.executor": "Run",
     "Python.install.executor": "Run",
+    "Python.m_pedidos.executor": "Run",
+    "Python.mercadopago.executor": "Run",
+    "Python.pg_mercadopago (1).executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/ademilson/PycharmProjects/portal-comprador/templates/sistema"
+    "last_opened_file_path": "C:/Users/ademilson/PycharmProjects/portal-comprador/static/js"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ademilson\PycharmProjects\portal-comprador\static\js" />
       <recent name="C:\Users\ademilson\PycharmProjects\portal-comprador\templates\sistema" />
-      <recent name="C:\Users\ademilson\PycharmProjects\portal-comprador\static\assets\img\categorias" />
-      <recent name="C:\Users\ademilson\PycharmProjects\portal-comprador\static\assets\img\produtos" />
+      <recent name="C:\Users\ademilson\PycharmProjects\portal-comprador\templates\sistema\meios_de_pagmentos" />
+      <recent name="C:\Users\ademilson\PycharmProjects\portal-comprador" />
+      <recent name="C:\Users\ademilson\PycharmProjects\portal-comprador\templates\sistema\mercadopago" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.c_produtos">
+  <component name="RunManager" selected="Python.pg_mercadopago (1)">
     <configuration name="c_produtos" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="portal-comprador" />
       <option name="ENV_FILES" value="" />
@@ -115,8 +140,77 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="m_pedidos" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="portal-comprador" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/models/pedidos" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/models/pedidos/m_pedidos.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pg_mercadopago (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="portal-comprador" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/models/meios_de_pagamento" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/models/meios_de_pagamento/pg_mercadopago.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pg_mercadopago" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="portal-comprador" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/models/meios_de_pagamento" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\ademilson\PycharmProjects\portal-comprador\models\meios_de_pagamento\pg_mercadopago.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.pg_mercadopago (1)" />
+        <item itemvalue="Python.m_pedidos" />
+        <item itemvalue="Python.pg_mercadopago" />
         <item itemvalue="Python.c_produtos" />
         <item itemvalue="Python.install" />
       </list>
@@ -186,7 +280,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725951824908</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Listagem de produtos na tela com preços por tabela de preço de clientes completa">
+      <option name="closed" value="true" />
+      <created>1726037711241</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1726037711241</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -204,12 +306,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>137</line>
+          <line>165</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>578</line>
+          <line>606</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

@@ -348,12 +348,14 @@ async function abrirNovoPedido(clienteId) {
             body: JSON.stringify({
                 pedido_id_app: 0,
                 pedido_cliente_id: clienteId,
-                data_programada: "0",
+                data_programada: null,
                 tipo_de_venda: 0,
                 forma_de_pagamento: 0,
                 vendedor_id: 0,
                 pedido_id_gestao: 0,
-                pedido_status: "aberto"
+                pedido_status: "aberto",
+                pedido_forma_pagamento: "0",
+                data_cadastro: null
             })
         });
 
@@ -426,7 +428,6 @@ async function handleProdutoClick(produtoId, vlrUnitario, tabelaDePrecoId) {
     if (!pedidoId) {
         pedidoId = await abrirNovoPedido(clienteId);
     }
-
     if (!pedidoId) {
         console.error('Erro ao criar ou recuperar pedido');
         return;

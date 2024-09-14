@@ -284,116 +284,19 @@ function selecionarFormaPagamento(listItem) {
 }
 
 // Função para confirmar a escolha da forma de pagamento
-async function confirmarPagamento() {
+function confirmarPagamento() {
     const formaSelecionada = document.querySelector('#listaFormasPagamento li.active');
-
     if (formaSelecionada) {
         const formaId = formaSelecionada.getAttribute('data-id');
-        const formaDesc = formaSelecionada.textContent.trim().toLowerCase(); // Padroniza a verificação
-        console.log("Forma selecionada:", formaDesc); // Adicionando log para depuração
+        const formaDesc = formaSelecionada.textContent;
 
-        const clienteId = getFromLocalStorage('apiRootIDCliente');
-        const pedidoId = await verificarPedidoAberto(clienteId); // Verifica se há um pedido aberto
+        // Aqui você pode tratar o que fazer com a forma de pagamento selecionada
+        console.log('Forma de pagamento selecionada:', formaDesc, 'ID:', formaId);
 
-        if (!pedidoId) {
-            alert('Nenhum pedido aberto encontrado.');
-            return;
-        }
-
-        if (formaDesc.includes('pagar agora')) {
-            console.log("Pagar Agora selecionado, requisitando link de pagamento");
-            // Se a opção "Pagar Agora" foi selecionada, faz a requisição para gerar o link de pagamento
-            await pagarAgora(formaId, pedidoId);
-        } else {
-            console.log("Outra forma de pagamento selecionada");
-            // Para as outras formas de pagamento, segue o fluxo normal
-            await atualizarFormaPagamentoNormal(formaId, pedidoId);
-        }
+        // Fechar a modal
+        fecharModal();
     } else {
         alert('Por favor, selecione uma forma de pagamento.');
-    }
-}
-
-// Função para seguir o fluxo de "Pagar Agora"
-async function pagarAgora(formaId, pedidoId) {
-    try {
-        console.log("Iniciando o pagamento agora");
-        // Fazer a requisição para gerar o link de pagamento
-        const token = getFromLocalStorage('apiRootToken');
-        const valorTotal = document.getElementById('totalPedido').textContent.replace('R$', '').trim();
-        console.log("Valor total:", valorTotal); // Log para verificar o valor total
-
-        const response = await fetch(`${apiRootLink}/gerar-link-pagamento?pedido_id=${pedidoId}&valor=${valorTotal}`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'token': token
-            }
-        });
-
-        if (!response.ok) throw new Error('Erro ao gerar link de pagamento');
-
-        const data = await response.json();
-        const linkPagamento = data.link_pagamento;
-       // Atualiza a forma de pagamento para "cartao agora" no backend
-        const resultadoForma = await atualizarCampoPedido(pedidoId, 'pedido_forma_pagamento', 'cartao agora');
-               // Atualiza a forma de pagamento para "cartao agora" no backend
-
-        console.log("Abrindo link de pagamento:", linkPagamento);
-
-        window.location.href = linkPagamento
-
-        if (!resultadoForma) throw new Error('Falha ao atualizar forma de pagamento');
-
-    } catch (error) {
-        console.error('Erro ao gerar link de pagamento:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Erro!',
-            text: 'Ocorreu um erro ao gerar o link de pagamento. Tente novamente.',
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000
-        });
-    }
-}
-
-// Função para atualizar as outras formas de pagamento normalmente
-async function atualizarFormaPagamentoNormal(formaId, pedidoId) {
-    try {
-        console.log("Atualizando forma de pagamento para outra opção:", formaId);
-        const resultadoForma = await atualizarCampoPedido(pedidoId, 'pedido_forma_pagamento', formaId);
-        if (!resultadoForma) throw new Error('Falha ao atualizar forma de pagamento');
-
-        const resultadoStatus = await atualizarCampoPedido(pedidoId, 'pedido_status', 'liberado');
-        if (!resultadoStatus) throw new Error('Falha ao atualizar status do pedido');
-
-        Swal.fire({
-            icon: 'success',
-            title: 'Pedido Finalizado',
-            text: 'Seu pedido foi finalizado com sucesso!',
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000
-        });
-
-        setTimeout(() => {
-            window.location.href = '/pedidos'; // Redireciona para a página do sistema
-        }, 3000);
-
-    } catch (error) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Erro!',
-            text: 'Ocorreu um erro ao finalizar o pedido. Tente novamente.',
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000
-        });
     }
 }
 
@@ -402,7 +305,6 @@ document.getElementById('finalizarPedidoBtn').addEventListener('click', async ()
     const clienteId = getFromLocalStorage('apiRootIDCliente');
     await listarFormasPagamento(clienteId); // Carregar e abrir a modal com formas de pagamento
 });
-
 
 
 // Função para atualizar um campo do pedido
@@ -428,6 +330,71 @@ async function atualizarCampoPedido(pedidoId, campo, novoValor) {
     } catch (error) {
         console.error('Erro ao atualizar o campo do pedido:', error);
         return null;
+    }
+}
+
+// Função para confirmar a escolha da forma de pagamento
+async function confirmarPagamento() {
+    const formaSelecionada = document.querySelector('#listaFormasPagamento li.active');
+
+    if (formaSelecionada) {
+        const formaId = formaSelecionada.getAttribute('data-id');
+        const formaDesc = formaSelecionada.textContent;
+        const clienteId = getFromLocalStorage('apiRootIDCliente');
+        const pedidoId = await verificarPedidoAberto(clienteId); // Verifica se há um pedido aberto
+
+        if (pedidoId) {
+            try {
+                // Atualiza o campo pedido_forma_pagamento com a forma selecionada
+                const resultadoForma = await atualizarCampoPedido(pedidoId, 'pedido_forma_pagamento', formaId);
+
+                if (!resultadoForma) {
+                    throw new Error('Falha ao atualizar forma de pagamento');
+                }
+
+                // Atualiza o campo pedido_status para 'liberado'
+                const resultadoStatus = await atualizarCampoPedido(pedidoId, 'pedido_status', 'liberado');
+
+                if (!resultadoStatus) {
+                    throw new Error('Falha ao atualizar status do pedido');
+                }
+
+                // Se ambos foram bem-sucedidos, redireciona para /sistema
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Pedido Finalizado',
+                    text: 'Seu pedido foi finalizado com sucesso!',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                setTimeout(() => {
+                    window.location.href = '/pedidos'; // Redireciona para a página do sistema após a mensagem de sucesso
+                }, 3000);
+
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro!',
+                    text: 'Ocorreu um erro ao finalizar o pedido. Tente novamente.',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+
+        } else {
+            alert('Nenhum pedido aberto encontrado.');
+        }
+
+        // Fechar a modal
+        fecharModal();
+
+    } else {
+        alert('Por favor, selecione uma forma de pagamento.');
     }
 }
 

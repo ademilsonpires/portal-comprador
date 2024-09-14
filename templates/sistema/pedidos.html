@@ -18,7 +18,6 @@
   <link
           href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap"
           rel="stylesheet">
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Vendor CSS Files -->
   <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +27,9 @@
   <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="../static/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-
+  <!-- Select2 -->
+  <link rel="stylesheet" href="../static/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="../static/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- Main CSS File -->
   <link href="../static/assets/css/main.css" rel="stylesheet">
 
@@ -40,7 +41,26 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <style>
-    .btn-getstarted {
+    @media (max-width: 768px) {
+  .select2-container {
+    width: 100% !important; /* Garante que o Select2 ocupe 100% da largura disponível */
+  }
+  .select2-container .select2-selection--single {
+    height: 40px; /* Ajusta a altura do Select2 para telas menores */
+  }
+}
+    .select2-container--default .select2-selection--single {
+  border-color: #198754; /* Cor de borda do Bootstrap success */
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #198754; /* Cor do texto do Bootstrap success */
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  border-left-color: #198754; /* Cor da seta */
+}
+       .btn-getstarted {
         position: relative; /* Necessário para o posicionamento absoluto do badge */
         padding: 0;
         margin: 0 10px; /* Espaçamento entre os ícones */
@@ -72,130 +92,6 @@
         color: #007bff; /* Altera a cor do ícone ao passar o mouse */
     }
 
-
-    .modal {
-        display: block;
-        position: fixed;
-        z-index: 1050; /* Alinhado com o Bootstrap */
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Fundo escurecido */
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        overflow: hidden;
-    }
-
-    .modal-content {
-        background-color: #fff;
-        border-radius: 0.5rem;
-        padding: 20px;
-        max-width: 500px;
-        width: 100%;
-        text-align: center;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        animation: fadeIn 0.3s ease;
-        position: relative;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: scale(0.9);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-
-    .close {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
-        cursor: pointer;
-        border: none;
-        background: transparent;
-    }
-
-    .close:hover {
-        color: #f44336;
-    }
-
-    .modal h2 {
-        margin-bottom: 20px;
-        font-size: 24px;
-        color: #333;
-    }
-
-    .modal .btn {
-        padding: 10px 15px;
-        border: none;
-        background-color: #28a745; /* Verde Bootstrap */
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 0.25rem;
-        transition: background-color 0.3s;
-        width: 100%;
-    }
-
-    .modal .btn:hover {
-        background-color: #218838; /* Verde mais escuro no hover */
-    }
-
-    .modal input[type="number"] {
-        width: 80px;
-        padding: 5px;
-        font-size: 16px;
-        text-align: center;
-        border: 1px solid #ccc;
-        border-radius: 0.25rem;
-        margin: 0 10px;
-    }
-
-    .modal .button-group {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .modal .button-group button {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-        border-radius: 50%;
-        margin: 0 5px;
-        border: none;
-        cursor: pointer;
-    }
-
-    /* Botão de diminuir (-) - Vermelho */
-    .modal .button-group #btnDiminuir {
-        background-color: #dc3545; /* Vermelho Bootstrap */
-        color: white;
-    }
-
-    .modal .button-group #btnDiminuir:hover {
-        background-color: #c82333; /* Vermelho mais escuro no hover */
-    }
-
-    /* Botão de aumentar (+) - Verde */
-    .modal .button-group #btnAumentar {
-        background-color: #28a745; /* Verde Bootstrap */
-        color: white;
-    }
-
-    .modal .button-group #btnAumentar:hover {
-        background-color: #218838; /* Verde mais escuro no hover */
-    }
-
 html, body {
     height: 100%;
     margin: 0;
@@ -215,6 +111,7 @@ html, body {
 }
 
   </style>
+
 </head>
 
 <body class="index-page">
@@ -229,15 +126,14 @@ html, body {
       <span>.</span>
     </a>
 
-<nav id="navmenu" class="navmenu">
+      <nav id="navmenu" class="navmenu">
         <ul>
 
-          <li><a href="/catalogo-produtos">Imagens de Produtos</a></li>
-          <li><a href="/pedidos">Meus Pedidos</a></li>
+          <li><a href="/gestao-usuarios"><i class="fa-solid fa-gear"></i> Gestão</a></li>
+          <li><a href="/pedidos"><i class="fa-solid fa-store"></i> Meus Pedidos</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-
     <a class="btn-getstarted " href="/sistema"><i class="fa-solid fa-house"></i> </a>
     <a class="btn-getstarted" id="carrinho" href="/carrinho">
       <i class="fa-solid fa-cart-shopping"></i>
@@ -248,42 +144,24 @@ html, body {
 </header>
 
 <main class="main">
-  <center>
-    <div class="col-md-6 mt-3 mx-4 d-flex justify-content-center">
-      <form class="form-inline w-100" onsubmit="return false;">
-        <div class="input-group input-group-sm">
-          <input id="search-bar" class="form-control form-control-navbar" type="search" placeholder="Buscar"
-                 aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-navbar" type="button" onclick="filtrarProdutos()">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </center>
-  <!-- Menu Section -->
-  <section id="menu" class="menu section">
-    <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-      <p><span>ESCOLHA SEUS</span> <span class="description-title">PRODUTOS</span></p>
-    </div><!-- End Section Title -->
 
-    <div class="container">
-      <!-- OPÇÕES DE CLICAR POR EMBALAGENS LOGO AQUI ABAIXO -->
-      <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="50">
-        <!-- As abas de embalagens serão preenchidas dinamicamente aqui pelo JavaScript -->
-      </ul>
 
-      <!-- Conteúdo de cada aba de embalagem -->
-      <div class="tab-content" data-aos="fade-up" data-aos-delay="25">
-        <!-- O conteúdo das embalagens será adicionado dinamicamente aqui -->
+  <section id="pedidos-section" class="pedidos-section section">
+    <div class="container" data-aos="fade-up">
+
+      <!-- Lista de Pedidos -->
+      <div class="order-items">
+        <h2>Lista de Pedidos</h2>
+        <ul class="list-group mb-4" id="listaPedidos">
+          <!-- Pedidos serão inseridos aqui -->
+        </ul>
       </div>
+
     </div>
-  </section><!-- /Menu Section -->
+  </section>
 
 </main>
+
 
 <footer id="footer" class="footer dark-background">
 
@@ -357,22 +235,36 @@ html, body {
 <div id="preloader"></div>
 
 <!-- Vendor JS Files -->
+<!-- jQuery -->
+<script src="../static/plugins/jquery/jquery.min.js"></script>
 <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../static/assets/vendor/php-email-form/validate.js"></script>
 <script src="../static/assets/vendor/aos/aos.js"></script>
 <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
 <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
 <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
-<!-- SweetAlert2 -->
+
+   <!-- SweetAlert2 -->
 <script src="../static/plugins/sweetalert2/sweetalert2.min.js"></script>
 
 <!-- Main JS File -->
 <script src="../static/assets/js/main.js"></script>
 <script src="../static/js/apiRoot.js"></script>
+<script src="../static/js/pedidos.js"></script>
 <script src="../static/js/mostrar-qtde-itens-carrinho.js"></script>
-<script src="../static/js/produtos.js"></script>
+<script src="../static/js/atualiza-status-pedido-pg.js"></script>
 
+<!-- Select2 -->
+<script src="../static/plugins/select2/js/select2.full.min.js"></script>
 
+<script>
+  $(document).ready(function() {
+  $('#enderecoEntrega').select2({
+    width: 'resolve' // Resolve a largura com base no container pai
+  });
+});
+
+</script>
 
 </body>
 

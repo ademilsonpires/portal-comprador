@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="../static/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- Main CSS File -->
   <link href="../static/assets/css/main.css" rel="stylesheet">
+  <link href="../static/assets/css/timeline.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Yummy
@@ -173,40 +174,68 @@ html, body {
 
 <main class="main">
 
-<section id="carrinho-section" class="carrinho-section section">
-  <div class="container" data-aos="fade-up">
-
-    <!-- Lista de Produtos no Carrinho -->
-    <div class="cart-items">
-      <h2>Itens no Carrinho</h2>
-      <ul id="cartItemsList" class="list-group mb-4">
-        <!-- Os itens do carrinho serão inseridos aqui dinamicamente -->
+  <!-- Timeline de Status do Pedido -->
+  <section id="timeline-section" class="timeline-section section">
+    <div class="container" data-aos="fade-up">
+      <ul class="timeline">
+        <li id="step-pedido">
+          <div class="icon-wrapper"><i class="fa-solid fa-check-double"></i></div>
+          <div class="text-wrapper">Pedido</div>
+        </li>
+        <li id="step-nota">
+          <div class="icon-wrapper"><i class="fa-solid fa-file-invoice"></i></div>
+          <div class="text-wrapper">Nota Emitida</div>
+        </li>
+        <li id="step-entrega">
+          <div class="icon-wrapper"><i class="fa-solid fa-truck"></i></div>
+          <div class="text-wrapper">Saiu p/ entrega</div>
+        </li>
+        <li id="step-recebido">
+          <div class="icon-wrapper"><i class="fa-solid fa-handshake"></i></div>
+          <div class="text-wrapper">Pedido Recebido</div>
+        </li>
       </ul>
-    </div>
 
-    <!-- Total do Pedido -->
-    <div class="cart-total mb-4 text-end">
-      <h3>Total do Pedido:
-        <span id="totalPedido" class="text-success fw-bold">
-          R$0.00
-        </span>
-      </h3>
-    </div>
-
-    <!-- Opções do Carrinho -->
-    <div class="cart-options mb-4">
-      <h2>Opções do Pedido</h2>
-
-      <!-- Botões de Ações -->
-      <div class="d-flex justify-content-between">
-        <button class="btn btn-danger" id="esvaziarCarrinhoBtn">Esvaziar Carrinho</button>
-        <button class="btn btn-success" id="finalizarPedidoBtn">Finalizar Pedido</button>
+      <!-- Botão de Confirmação de Entrega (somente quando o status for 'entrega') -->
+      <div id="confirmar-entrega" class="text-center mt-4" style="display: none;">
+        <button class="btn btn-success" onclick="confirmarEntrega()">Confirmar Entrega</button>
       </div>
     </div>
-  </div>
-</section>
-</main>
+  </section>
 
+<!-- Detalhes do Pedido -->
+<section id="carrinho-section" class="carrinho-section section">
+    <div class="container" data-aos="fade-up">
+
+        <!-- Legenda para o status da timeline -->
+        <div class="legenda-timeline mb-4 text-center">
+            <span class="badge-status bg-amarelo"></span> <span>Em andamento</span>
+            <span class="badge-status bg-verde ms-4"></span> <span>Concluído</span>
+        </div>
+
+        <!-- Lista de Produtos no Pedido -->
+        <div class="cart-items">
+            <h2>Itens do Pedido</h2>
+            <ul id="cartItemsList" class="list-group mb-4">
+                <!-- Os itens do pedido serão inseridos aqui dinamicamente -->
+            </ul>
+        </div>
+
+        <!-- Total do Pedido -->
+        <div class="cart-total mb-4 text-end">
+            <h3>Total do Pedido:
+                <span id="totalPedido" class="text-success fw-bold">R$0.00</span>
+            </h3>
+        </div>
+
+        <!-- Botão de Confirmar Entrega (aparece apenas para o status 'entrega') -->
+        <div id="confirmarEntregaContainer" class="text-center">
+            <button class="btn btn-warning" id="confirmarEntregaBtn">Confirmar Entrega</button>
+        </div>
+    </div>
+</section>
+
+</main>
 
    <footer id="footer" class="footer dark-background">
 
@@ -293,8 +322,6 @@ html, body {
     </div>
   </div>
 </div>
-<!--   //modal para decidir pagar agora ou depois-->
-
 
   <!-- Vendor JS Files -->
    <!-- jQuery -->
@@ -314,10 +341,9 @@ html, body {
   <script src="../static/assets/js/main.js"></script>
   <script src="../static/js/apiRoot.js"></script>
   <script src="../static/js/produtos.js"></script>
-  <script src="../static/js/meu-carrinho.js"></script>
+  <script src="../static/js/pedido-detalhes.js"></script>
         <!-- Select2 -->
     <script src="../static/plugins/select2/js/select2.full.min.js"></script>
-   <script src="https://www.mercadopago.com/v2/security.js" view="carrinho"></script>
 
 <script>
   $(document).ready(function() {
